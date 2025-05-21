@@ -1,0 +1,17 @@
+<div class="ruta-card">
+  <a class="ruta-card" [routerLink]="['/rutas', ruta.id_ruta]">
+    <div class="imagen-container">
+      <img
+        class="ruta-imagen"
+        [src]=" apiurl  + ruta.fotos[0].url_foto"
+        [alt]="ruta.titulo_ruta" />
+      <span class="ruta-tematica">{{ getFiltroPorDescription('Tematica') }}</span>
+    </div>
+
+    <div class="ruta-info">
+      <h3 class="ruta-titulo">{{ ruta.titulo_ruta }}</h3>
+      <p class="ruta-duracion">{{ getFiltroPorDescription('Duración') }} días</p>
+      <p class="ruta-ciudad">{{ getFiltroPorDescription('Ciudades') }}</p>
+    </div>
+  </a>
+  </div>

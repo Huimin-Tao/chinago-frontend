@@ -1,0 +1,30 @@
+<!-- <form class="buscador-form" [formGroup]="filtroForm" (ngSubmit)="submit()"> -->
+<form *ngIf="!filtrosPersonalizados" class="buscador-form" [formGroup]="filtroForm" (ngSubmit)="submit()">
+  <input
+    type="text"
+    formControlName="q"
+    placeholder="Buscar la ruta…"
+    aria-label="Buscar rutas"
+    (focus)="onInputFocus()"
+  />
+  <button type="submit">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
+
+<!-- Modal de filtros -->
+<!-- <div class="modal-backdrop" *ngIf="showFilter" (click)="onClose()"></div>
+<div class="modal-content" *ngIf="showFilter"> -->
+<div class="modal-backdrop" *ngIf="filtrosPersonalizados || showFilter" (click)="onClose()"></div>
+<div class="modal-content" *ngIf="filtrosPersonalizados || showFilter">
+  <div class="modal-body">
+    <div *ngFor="let tipo of filteredTipos$ | async">
+      <h4>{{ tipo.description_filtro }}</h4>
+      <ul>
+        <li *ngFor="let filtro of tipo.filtros">
+          <button (click)="onSelect(filtro)">{{ filtro.contenido_filtro }}</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

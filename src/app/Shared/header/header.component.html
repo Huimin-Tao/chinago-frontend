@@ -1,0 +1,63 @@
+<ng-container *ngIf="isAdmin; else normalHeader">
+  <!-- HEADER ADMINISTRADOR -->
+  <header class="header">
+    <nav class="navbar portada">
+      <div class="logo-portada">
+        <a routerLink="/" title="Inicio">
+          <img src="/assets/images/logo-light.svg" alt="Logo de ChinaGo">
+        </a>
+      </div>
+      <ul class="navigation navlink" [class.active]="open">
+        <li><a routerLink="/" (click)="open=false">HOME</a></li>
+        <li><a routerLink="/cms/gestion-rutas"   (click)="open=false">CMS RUTAS</a></li>
+        <li><a routerLink="/cms/gestion-guias"   (click)="open=false">CMS GUÍAS</a></li>
+        <li><a routerLink="/cms/gestion-clientes"(click)="open=false">CMS CLIENTES</a></li>
+        <li><a routerLink="/logout" (click)="open=false">LOGOUT</a></li>
+        <li><a routerLink="/profile" (click)="open=false">PERFIL</a></li>
+      </ul>
+      <button class="hamburguesa" aria-label="Abrir menú" (click)="open = !open">
+        <span class="line"></span><span class="line"></span><span class="line"></span>
+      </button>
+    </nav>
+  </header>
+</ng-container>
+
+<ng-template #normalHeader>
+<header class="header">
+    <nav class="navbar portada">
+      <!-- logotipo -->
+      <div class="logo-portada">
+        <a routerLink="/" aria-label="Ir a la página de inicio" title="página de inicio">
+          <img src="/assets/images/logo-light.svg" alt="Logo de ChinaGo">
+        </a>
+      </div>
+
+      <!-- menu navegación -->
+      <ul class="navigation navlink" [class.active]="open" >
+        <li><a routerLink="/" (click)="open=false">HOME</a></li>
+        <li><a routerLink="/rutas" (click)="open=false">RUTAS</a></li>
+        <li><a routerLink="/formulario" (click)="open=false">VIAJE A MEDIDA</a></li>
+        <li><a routerLink="/guias" (click)="open=false">GUÍA</a></li>
+
+        <!-- si no está logueado -->
+        <ng-container *ngIf="!(auth.currentUser$ | async); else logueado">
+          <li><a routerLink="/signup" (click)="open=false">SIGNUP</a></li>
+          <li><a routerLink="/login" (click)="open=false">LOGIN</a></li>
+        </ng-container>
+
+        <!-- si está logueado -->
+        <ng-template #logueado>
+          <li><a routerLink="/profile" (click)="open=false">PERFIL</a></li>
+          <li><a routerLink="/logout" (click)="open=false">LOGOUT</a></li>
+        </ng-template>
+      </ul>
+
+      <!-- icono de hamburguesa -->
+      <button class="hamburguesa" aria-label="Abrir el menú de navegación" (click)="open = !open">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
+    </nav>
+  </header>
+</ng-template>

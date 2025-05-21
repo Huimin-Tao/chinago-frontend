@@ -1,0 +1,229 @@
+.guia-container {
+  position:relative;
+  width: 80%;
+  max-width:1200px;
+  margin: auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  color:var(--primary-color);
+}
+
+:host{
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+
+h1 {
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align:center;
+}
+
+
+/* Tarjeta  */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: var(--text-color-dark-background);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding-bottom:0.75rem;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.card h2 {
+  margin:3px 3px 1px 5px;;
+  font-size: 1rem;
+  text-align:left;
+}
+
+
+/* Paginación */
+nav {
+  margin-bottom: 3rem;
+}
+
+.paginacion-basica {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.paginacion-basica button {
+  padding: 0.8rem 1rem;
+  background-color: var(--primary-color);
+  color:var(--text-color-dark-background);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.paginacion-basica button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+}
+
+.paginacion-basica button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginacion-numerica {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginacion-numerica li {
+  width: 1.5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  color:var(--primary-color);
+  transition: background-color 0.2s;
+}
+
+.paginacion-numerica li:hover {
+  background-color: var(--primary-color);
+  color:var(--text-color-dark-background);
+}
+
+.paginacion-numerica li.activa {
+  background-color: var(--primary-color);
+  color: var(--text-color-dark-background);
+}
+
+
+
+/* En pantallas ≥1024px: ocultar básica, mostrar numérica */
+@media screen and (min-width: 1024px) {
+  .paginacion-basica {
+    display: none;
+  }
+  .paginacion-numerica {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .paginacion-basica {
+    display: flex;
+  }
+  .paginacion-numerica {
+    display: none;
+  }
+}
+
+
+
+/* Sección “Guía Virtual” */
+.chatbot-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: var(--text-color-dark-background);
+}
+
+.chatbot-panel {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.chatbot-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.chatbot-title small{
+  display:block;
+  margin-top:0.25rem;
+}
+
+.chatbot-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.chatbot-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--text-color-dark-background);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chatbot-button:hover:not(:disabled) {
+  background-color:var(--contrast-color-light);
+}
+.chatbot-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.chatbot-response {
+  width: 100%;
+  height: 15rem;
+  padding: 1rem;
+  background-color: var(--text-color-dark-background);
+  color: var(--text-color-grey);
+  text-align: left;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+
+@media (max-width: 768px) {
+  .chatbot-container {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+  }
+
+  .chatbot-panel {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+}

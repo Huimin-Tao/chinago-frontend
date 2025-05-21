@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<div class="auth-container">
+  <h1>EDITAR MI PERFIL</h1>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="input-group">
+      <label>Nombre *</label>
+      <input type="text" formControlName="nombre" />
+
+      <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('nombre')?.hasError('required')">El nombre es obligatorio.</ng-container>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="input-group">
+      <label>Apellidos *</label>
+      <input type="text" formControlName="apellidos" />
+
+      <div *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('apellidos')?.hasError('required')">Los apellidos son obligatorios.</ng-container>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="input-group">
+      <label>Email *</label>
+      <input type="email" formControlName="email" />
+
+      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('email')?.hasError('required')">El email es obligatorio.</ng-container>
+          <ng-container *ngIf="form.get('email')?.hasError('email')">Introduce un correo electrónico válido.</ng-container>
+        </span>
+      </div>
+    </div>
+
+
+
+    <button type="submit" [disabled]="form.invalid || isSubmitting" [class.pulsado]="isSubmitting">
+      GUARDAR CAMBIOS
+    </button>
+  </form>
+</div>
+
+<app-footer></app-footer>

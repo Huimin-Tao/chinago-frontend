@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<main class="guia-page" *ngIf="guia; else loading">
+  <!-- MIGA DE PAN -->
+  <nav class="breadcrumb">
+    <a routerLink="/">Home</a> ›
+    <a routerLink="/guias">Guías</a> ›
+    <span>{{ guia.titulo_guia }}</span>
+  </nav>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <img
+    [src]=" apiurl + guia.fotos[1]!.url_foto"
+      alt="{{ guia.titulo_guia }}"
+      class="banner-img"
+    />
+    <div class="banner-overlay">
+      <h1 class="banner-title">{{ guia.titulo_guia }}</h1>
+      <button class="cta-button"><a routerLink="/formulario" >CREA TU VIAJE</a></button>
+    </div>
+  </section>
+
+  <!-- TEXTO PRINCIPAL -->
+  <section class="main-text" [innerHTML]="safeHtml"></section>
+
+  <!-- GUÍAS SIMILARES -->
+  <section
+    *ngIf="guiasSimilares.length"
+    class="similar-guides"
+  >
+    <h2>Guías Similares</h2>
+    <div class="similar-grid">
+      <a
+        *ngFor="let sim of guiasSimilares"
+        [routerLink]="['/guias', sim.id_guia]"
+        class="similar-card"
+      >
+        <img
+          [src]=" apiurl+ sim.fotos[0].url_foto"
+          [alt]="sim.titulo_guia"
+        />
+        <h3>{{ sim.titulo_guia }}</h3>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<ng-template #loading>
+  <p>Cargando guía...</p>
+</ng-template>
+
+  <app-footer></app-footer>

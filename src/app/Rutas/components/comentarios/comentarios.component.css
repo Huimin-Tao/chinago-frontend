@@ -1,0 +1,115 @@
+.comments-section {
+    margin-top: 3rem;
+  }
+
+  .comments-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .comment-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .avatar-icon {
+   font-size:25px;
+   line-height: 25px;
+   margin-right:1em;
+   display:inline-block;
+  }
+
+  .comment-body {
+    flex: 1;
+  }
+
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .username {
+    font-weight: 600;
+  }
+
+  .comment-stars i {
+    margin-left: 4px;
+  }
+
+  .comment-text {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+
+  /* Formulario */
+  .leave-comment {
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .rating-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .rating-input label {
+    margin-right: 1rem;
+    font-weight: 600;
+  }
+
+  .rating-input .fa {
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .comment-input {
+    margin-bottom: 1.5rem;
+  }
+
+  .comment-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .comment-input textarea {
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    font-family: var(--roboto);
+  }
+
+  /* Botón */
+  .btn-submit {
+    background-color: var(--contrast-color-light);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn-submit:hover {
+    background-color: var(--secondary-color);
+    color:var(--text-color-dark-background);
+    border:none;
+  }

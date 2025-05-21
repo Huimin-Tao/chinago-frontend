@@ -1,0 +1,105 @@
+.auth-container {
+  position:relative;
+   width:80%;
+   max-width:400px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  .auth-container label {
+    display: block;
+    margin: 1rem 0 0.3rem;
+    text-align: left;
+    font-size:1rem;
+  }
+  .auth-container input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+  }
+
+  .auth-container input:focus {
+    border:2px solid var(--secondary-color);
+  }
+
+  .auth-container button {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: var(--secondary-color);
+    color: var(--text-color-dark-background);
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight:600;
+    letter-spacing:0.5px;
+    font-size:1rem;
+    transition: background-color 0.3s ease;;
+  }
+
+  .auth-container button:disabled {
+    background-color: var(--contrast-color-light);
+    color: var(--text-color-dark-background);
+    cursor: not-allowed;
+  }
+
+  .auth-container button:pulsado {
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+  }
+
+  h1{
+    margin-bottom:35px;
+    letter-spacing:1px;
+    color:var(--primary-color);
+  }
+
+
+.input-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.error-message {
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.error-text {
+  color: var(--secondary-color);
+}
+
+
+.auth-container input.ng-invalid.ng-touched {
+  border-color: var(--secondary-color)
+}
+
+:host{
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.auth-error {
+  color: var(--secondary-color);
+  margin-top:0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.auth-error .error-icon {
+  margin-right: 0.5rem;
+  font-size:1.2rem;
+}
+
+

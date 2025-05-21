@@ -1,0 +1,141 @@
+<app-header></app-header>
+
+<div class="auth-container">
+  <h1>CREA TUS PROPIOS VIAJES</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <!-- Nombre -->
+    <div class="input-group">
+      <label>Nombre *</label>
+      <input type="text" formControlName="nombre" placeholder="Introduce tu nombre"/>
+      <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">El nombre es obligatorio.</span>
+      </div>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="input-group">
+      <label>Apellidos *</label>
+      <input type="text" formControlName="apellidos" placeholder="Introduce tus apellidos" />
+      <div *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Los apellidos son obligatorios.</span>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="input-group">
+      <label>Email *</label>
+      <input type="email" formControlName="email" placeholder="Introduce tu email"/>
+      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('email')?.hasError('required')">El email es obligatorio.</ng-container>
+          <ng-container *ngIf="form.get('email')?.hasError('email')">Introduce un correo válido.</ng-container>
+        </span>
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="input-group">
+      <label>Teléfono *</label>
+      <input type="tel" formControlName="telefono" placeholder="Introduce tu teléfono" />
+      <div *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">El teléfono es obligatorio.</span>
+      </div>
+    </div>
+
+    <!-- Presupuesto -->
+    <div class="input-group">
+      <label>Presupuesto por persona *</label>
+      <div class="button-group">
+        <button
+          type="button"
+          *ngFor="let p of presupuestos"
+          [class.selected]="form.value.presupuesto === p.value"
+          (click)="form.get('presupuesto')?.setValue(p.value)">
+          {{ p.label }}
+        </button>
+      </div>
+      <div *ngIf="form.get('presupuesto')?.invalid && form.get('presupuesto')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Selecciona un presupuesto.</span>
+      </div>
+    </div>
+
+    <!-- Destino -->
+    <div class="input-group">
+      <label>¿A dónde quieres viajar? *</label>
+      <select formControlName="destino">
+        <option value="" disabled>Selecciona</option>
+        <option *ngFor="let d of destinos" [value]="d">{{ d }}</option>
+      </select>
+      <div *ngIf="form.get('destino')?.invalid && form.get('destino')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Selecciona un destino.</span>
+      </div>
+    </div>
+
+    <!-- Con quién -->
+    <div class="input-group">
+      <label>Con quién viajas *</label>
+      <div class="button-group">
+        <button
+          type="button"
+          *ngFor="let o of opcionesCompaneros"
+          [class.selected]="form.value.companeros === o.value"
+          (click)="form.get('companeros')?.setValue(o.value)">
+          {{ o.label }}
+        </button>
+      </div>
+      <div *ngIf="form.get('companeros')?.invalid && form.get('companeros')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Selecciona una opción.</span>
+      </div>
+    </div>
+
+    <!-- Tipo de hotel -->
+    <div class="input-group">
+      <label>¿Qué tipo de hotel prefieres? *</label>
+      <div class="button-group">
+        <button
+          type="button"
+          *ngFor="let h of tiposHotel"
+          [class.selected]="form.value.tipoHotel === h.value"
+          (click)="form.get('tipoHotel')?.setValue(h.value)">
+          {{ h.label }}
+        </button>
+      </div>
+      <div *ngIf="form.get('tipoHotel')?.invalid && form.get('tipoHotel')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Selecciona un tipo de hotel.</span>
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="input-group">
+      <label>Comentarios o peticiones especiales</label>
+      <textarea formControlName="comentarios" rows="1" placeholder="Escribe tus comentarios o peticiones"></textarea>
+    </div>
+
+    <!-- Aceptación -->
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" formControlName="aceptar" />
+        He leído y aceptado la política de privacidad.
+      </label>
+      <div *ngIf="form.get('aceptar')?.invalid && form.get('aceptar')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">Debes aceptar la política.</span>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid || isSubmitting" [class.pulsado]="isSubmitting">
+      ENVIAR MI CONSULTA
+    </button>
+  </form>
+</div>
+
+<app-footer></app-footer>

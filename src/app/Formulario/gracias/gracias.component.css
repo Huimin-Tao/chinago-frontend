@@ -1,0 +1,52 @@
+/* Contenedor centrado en toda la página */
+.gracias-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 1rem;
+  color:var(--primary-color);
+}
+
+.gracias-card {
+  width: 80%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gracias-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.gracias-content p {
+  margin: 0.5rem 0;
+  text-align: left;
+  line-height: 1.5;
+  font-size:1rem;
+}
+
+.gracias-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.btn-volver {
+  background-color: var(--secondary-color);
+  color: var(--text-color-dark-background);
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn-volver:hover {
+  background-color:var(--primary-color);
+}

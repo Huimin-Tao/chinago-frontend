@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<div class="auth-container">
+  <h1>LOGIN</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="input-group">
+      <label>Email *</label>
+      <input type="email" formControlName="email_user" />
+
+      <div *ngIf="form.get('email_user')?.invalid && form.get('email_user')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('email_user')?.hasError('required')">El email es obligatorio.</ng-container>
+          <ng-container *ngIf="form.get('email_user')?.hasError('email')">Introduce un correo electrónico
+            válido.</ng-container>
+        </span>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Contraseña * </label>
+      <input type="password" formControlName="password_user" />
+
+      <div *ngIf="form.get('password_user')?.invalid && form.get('password_user')?.touched" class="error-message">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span class="error-text">
+          <ng-container *ngIf="form.get('password_user')?.hasError('required')">La contraseña es
+            obligatoria.</ng-container>
+          <ng-container *ngIf="form.get('password_user')?.hasError('minlength')">Mínimo 6 caracteres.</ng-container>
+        </span>
+      </div>
+
+      <div *ngIf="errorMessage" class="auth-error">
+        <mat-icon class="error-icon">error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+    </div>
+
+
+    <button type="submit" [disabled]="form.invalid ||isSubmitting" [class.pulsado]="isSubmitting">LOGIN</button>
+  </form>
+</div>
+
+
+<app-footer></app-footer>

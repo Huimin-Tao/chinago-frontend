@@ -1,0 +1,227 @@
+.gestion-guias-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+.sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background-color: var(--secondary-color);
+}
+
+.sidebar button[disabled] {
+    background-color: var(--text-color-grey);
+    cursor: not-allowed;
+}
+
+
+
+.content {
+    flex: 1;
+    padding: 2rem 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 4px;
+}
+
+input, textarea {
+    border: 1px solid var(--primary-color);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.content button:not(.mat-icon-button) {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark-background);
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.content button[disabled] {
+    background-color: var(--contrast-color-light);
+    color: var(--text-color-dark-background);
+    cursor: not-allowed;
+}
+
+.content button:hover {
+    background-color: var(--contrast-color-light);
+}
+
+.spinner {
+    margin: 40px auto;
+    display: block;
+}
+
+mat-header-cell {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+th, td {
+    border-bottom: 1px solid var(--text-color-grey);
+    padding: 8px;
+    text-align: center;
+}
+
+mat-cell {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-form {
+    margin-top: 32px;
+}
+
+.error {
+    color: var(--secondary-color);
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.mat-column-id {
+    width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+
+
+.itinerario-section {
+    margin-top: 2rem;
+    margin-bottom:2rem;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+  }
+
+  .legend{
+    font-weight:700;
+    font-size:1.5rem;
+  }
+
+
+
+  .itinerarios-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .itinerario-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+
+  .descripcion-itinerario {
+    grid-column: 1 / -1;
+  }
+
+  .descripcion-itinerario mat-form-field {
+    width: 100% !important;
+  }
+
+  .icono-selector {
+    grid-column: 1 / -1;
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 6px;
+  }
+
+  .iconos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .icono-opcion {
+    width: 35px;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    background-color: var(--primary-color);
+    padding: 4px;
+  }
+
+  .icono-opcion.selected,
+  .icono-opcion:hover {
+    background-color: var(--secondary-color);
+  }
+
+  .icono-opcion img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+.itinerario-action-button {
+  width: 100%;
+  text-transform: uppercase;
+  display:block;
+  grid-column:1/-1;
+}
+

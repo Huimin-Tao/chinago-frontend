@@ -1,0 +1,141 @@
+.gestion-guias-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--primary-color);
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items:flex-start;
+    gap:50px;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+.sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.sidebar button:hover{
+    background-color: var(--secondary-color);
+}
+
+.sidebar button[disabled] {
+    background-color: var(--text-color-grey);
+    cursor: not-allowed;
+}
+
+.content {
+    flex: 1;
+    padding-left: 40px;
+    padding-right:40px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 4px;
+}
+
+input, textarea {
+    border: 1px solid var(--primary-color);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+
+.content button{
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark-background);
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.content button[disabled] {
+    background-color: var(--contrast-color-light);
+    color: var(--text-color-dark-background);
+    cursor: not-allowed;
+}
+
+.content button:hover{
+    background-color: var(--contrast-color-light);
+}
+
+.spinner {
+    margin: 40px auto;
+    display: block;
+}
+
+
+mat-header-cell{
+    font-weight:700;
+    color:var(--primary-color);
+    text-transform: uppercase;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+th, td {
+    border-bottom: 1px solid var(--text-color-grey);
+    padding: 8px;
+    text-align: center;
+}
+
+mat-cell{
+    display:flex;
+    gap:10px;
+}
+
+.edit-form {
+    margin-top: 32px;
+}
+
+.error {
+    color: var(--secondary-color);
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+
+.mat-column-id {
+    width: 80px;
+    max-width: 80px;
+    text-align: center;
+}

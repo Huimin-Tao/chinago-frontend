@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<div class="guia-container">
+  <h1>GUÍAS DE VIAJE</h1>
+
+
+<!-- Tarjeta -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ">
+    <a *ngFor="let g of guiasPaginadas" class="card" [routerLink]="['/guias', g.id_guia]">
+      <img
+        [src]=" apiurl + g.fotos[0]!.url_foto"
+        alt="{{ g.titulo_guia }}"
+        class="rounded"
+      />
+      <h2 class="mt-2 font-semibold">{{ g.titulo_guia }}</h2>
+    </a>
+  </div>
+
+
+<!-- PAGINACIÓN -->
+  <nav *ngIf="totalGuias > tamPagina" class="paginacion">
+    <!-- MÓVIL/TABLET: botones «Anterior» / «Siguiente» -->
+    <div class="paginacion-basica">
+      <button
+        (click)="cambiarPagina(paginaActual - 1)"
+        [disabled]="paginaActual === 1"
+      >
+        « Anterior
+      </button>
+
+      <button
+        (click)="cambiarPagina(paginaActual + 1)"
+        [disabled]="paginaActual === totalPaginas"
+      >
+        Siguiente »
+      </button>
+    </div>
+
+    <!-- DESKTOP: lista numerada -->
+    <ul class="paginacion-numerica">
+      <li
+        *ngFor="let p of paginas"
+        (click)="cambiarPagina(p)"
+        [class.activa]="paginaActual === p"
+      >
+        {{ p }}
+      </li>
+
+    </ul>
+  </nav>
+
+
+  <!-- GUÍA VIRTUAL (Chatbot IA) -->
+  <section class="chatbot-container">
+    <!-- Panel de entrada -->
+    <div class="chatbot-panel chatbot-input-panel">
+      <p class="chatbot-title">Guía Virtual: <small>Pregunta lo que quieras</small></p>
+      <input
+        class="chatbot-input"
+        [(ngModel)]="chatInput"
+        type="text"
+        placeholder="Escribe tu pregunta aquí"
+      />
+      <button
+        class="chatbot-button"
+        (click)="sendQuestion()"
+        [disabled]="!chatInput || loading"
+      >
+        {{ loading ? 'ENVIANDO...' : 'ENVIAR' }}
+      </button>
+    </div>
+
+    <!-- Panel de respuesta -->
+    <div class="chatbot-panel chatbot-response-panel">
+      <h2 class="chatbot-title">Tu respuesta</h2>
+      <div class="chatbot-response">
+        {{ chatResponse || 'Aquí aparecerá la respuesta de la IA...' }}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<app-footer></app-footer>

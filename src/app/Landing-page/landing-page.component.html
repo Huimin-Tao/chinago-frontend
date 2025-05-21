@@ -1,0 +1,121 @@
+<div class="hero-container">
+
+  <div class="overlay">
+
+
+    <!-- LOGO Y MENÚ DE NAVEGACIÓN -->
+
+    <ng-container *ngIf="isAdmin; else normalHeader">
+      <!-- HEADER ADMINISTRADOR -->
+      <header class="header">
+        <nav class="navbar portada">
+          <div class="logo-portada">
+            <a routerLink="/" title="Inicio">
+              <img src="/assets/images/logo-dark.svg" alt="Logo de ChinaGo">
+            </a>
+          </div>
+          <ul class="navigation portada navlink" [class.active]="open">
+            <li><a routerLink="/" (click)="open=false">HOME</a></li>
+            <li><a routerLink="/cms/gestion-rutas"   (click)="open=false">CMS RUTAS</a></li>
+            <li><a routerLink="/cms/gestion-guias"   (click)="open=false">CMS GUÍAS</a></li>
+            <li><a routerLink="/cms/gestion-clientes"(click)="open=false">CMS CLIENTES</a></li>
+            <li><a routerLink="/logout" (click)="open=false">LOGOUT</a></li>
+            <li><a routerLink="/profile" (click)="open=false">PERFIL</a></li>
+          </ul>
+          <button class="hamburguesa" aria-label="Abrir menú" (click)="open = !open">
+            <span class="line"></span><span class="line"></span><span class="line"></span>
+          </button>
+        </nav>
+      </header>
+    </ng-container>
+
+    <ng-template #normalHeader>
+    <header class="header">
+        <nav class="navbar portada">
+          <!-- logotipo -->
+          <div class="logo-portada">
+            <a routerLink="/" aria-label="Ir a la página de inicio" title="página de inicio">
+              <img src="/assets/images/logo-dark.svg" alt="Logo de ChinaGo">
+            </a>
+          </div>
+
+          <!-- menu navegación -->
+          <ul class="navigation portada navlink" [class.active]="open" >
+            <li><a routerLink="/" (click)="open=false">HOME</a></li>
+            <li><a routerLink="/rutas" (click)="open=false">RUTAS</a></li>
+            <li><a routerLink="/formulario" (click)="open=false">VIAJE A MEDIDA</a></li>
+            <li><a routerLink="/guias" (click)="open=false">GUÍA</a></li>
+
+            <!-- si no está logueado -->
+            <ng-container *ngIf="!(auth.currentUser$ | async); else logueado">
+              <li><a routerLink="/signup" (click)="open=false">SIGNUP</a></li>
+              <li><a routerLink="/login" (click)="open=false">LOGIN</a></li>
+            </ng-container>
+
+            <!-- si está logueado -->
+            <ng-template #logueado>
+              <li><a routerLink="/profile" (click)="open=false">PERFIL</a></li>
+              <li><a routerLink="/logout" (click)="open=false">LOGOUT</a></li>
+            </ng-template>
+          </ul>
+
+          <!-- icono de hamburguesa -->
+          <button class="hamburguesa" aria-label="Abrir el menú de navegación" (click)="open = !open">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </button>
+        </nav>
+      </header>
+    </ng-template>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="layout">
+      <!-- hora local y lema -->
+      <div class="col-left">
+        <main>
+          <div class="banner-portada">
+            <div class="hora">
+              <span>HORA BEIJING: </span>
+              <span *ngIf="horaBeijing;else cargando">{{horaBeijing}}</span>
+              <ng-template #cargando>
+                <mat-progress-spinner diameter="20" strokeWidth="3" mode="indeterminate" class="custom-spinner"></mat-progress-spinner>
+              </ng-template>
+            </div>
+
+            <h2>Sin Visado, Sin Límite:</h2>
+            <h1>Viaja con ChinaGo</h1>
+          </div>
+        </main>
+
+        <!-- pie de página  -->
+        <footer class="footer-portada">
+          <p>2025 &copy; HUIMIN TAO</p>
+          <div class="links">
+            <a routerLink="politica-privacidad">Política de Privacidad</a> |
+            <a routerLink="politica-cookies">Política de Cookies</a> |
+            <a routerLink="aviso-legal">Aviso Legal</a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- galería -->
+      <div class="col-right">
+        <div class="galeria">
+          <a *ngFor="let imagen of images" [routerLink]="imagen.id"><img [src]="imagen.src" class="clip" alt="foto china"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- pie de página para móviles/tabletas  -->
+    <footer class="footer-portada-visible-movil">
+      <p>2025 &copy; HUIMIN TAO</p>
+      <div class="links-visible-movil links">
+        <a routerLink="politica-privacidad">Política de Privacidad</a>
+        <a routerLink="politica-cookies">Política de Cookies</a>
+        <a routerLink="aviso-legal">Aviso Legal</a>
+      </div>
+    </footer>
+
+
+  </div>

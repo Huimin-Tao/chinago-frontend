@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #313866;
+    --secondary-color: #BF0CF0;
+    --contrast-color-light: #F3CCF3;
+    --text-color-dark-background: #FFFFFF;
+    --text-color-grey: #9e9dab;
+    --bg-color: #f8f8f8;
+    --noto-serif: "Noto Serif", serif;
+    --roboto: "Roboto", sans-serif;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales de tipografía, colores y comportamientos*/
+html {
+    scroll-behavior: smooth;
+}
+
+html, body{
+    font-family:var(--roboto);
+    font-weight:400;
+    font-size:1.1rem;
+    background-color:var(--bg-color);
+    color: var(var(--primary-color));
+    line-height: 1.5;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1{
+    font-family: var(--noto-serif);
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+h2,
+h3{
+    font-weight: 700;
+}
+
+nav {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--text-color-dark-background);
+    letter-spacing: 0.1rem;
+    text-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s;
+}
+
+.main-text > section h2 {
+    margin-bottom: 1em;
+  }
+
+/* Tipografía responsive*/
+/* Breakpoints:  Móvil 480px, Tableta 768px, Desktop 1024px */

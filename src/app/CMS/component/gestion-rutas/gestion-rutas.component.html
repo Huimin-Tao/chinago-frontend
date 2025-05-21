@@ -1,0 +1,294 @@
+<app-header></app-header>
+
+<div class="gestion-guias-container">
+  <aside class="sidebar">
+    <button mat-raised-button color="primary" (click)="switchMode('create')" [disabled]="mode==='create'">
+      CREAR RUTAS
+    </button>
+    <button mat-raised-button color="accent" (click)="switchMode('edit')" [disabled]="mode==='edit'">
+      EDITAR O ELIMINAR RUTAS
+    </button>
+  </aside>
+
+  <section class="content">
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate" class="spinner"></mat-progress-spinner>
+
+    <ng-container *ngIf="!loading">
+      <!-- MODO CREAR -->
+      <div *ngIf="mode==='create'">
+        <h1>Crear Rutas</h1>
+        <form [formGroup]="rutaForm" (ngSubmit)="onCreate()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Título de la ruta</mat-label>
+            <input matInput formControlName="titulo_ruta" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción de la ruta</mat-label>
+            <textarea matInput formControlName="description_ruta"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('presupuesto_ruta')">
+            <mat-label>Presupuesto</mat-label>
+            <input matInput [value]="rutaForm.get('presupuesto_ruta')?.value" readonly />
+          </mat-form-field>
+          <app-buscador-rutas *ngIf="modalActivo === 'presupuesto_ruta'"
+            [filtrosPersonalizados]="getFiltrosPorCampo('presupuesto_ruta')"
+            (seleccionarValor)="onValorSeleccionado('presupuesto_ruta', $event)"></app-buscador-rutas>
+
+
+
+          <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('ciudades_ruta')">
+            <mat-label>Ciudades</mat-label>
+            <input matInput [value]="rutaForm.get('ciudades_ruta')?.value" readonly />
+          </mat-form-field>
+          <app-buscador-rutas *ngIf="modalActivo === 'ciudades_ruta'"
+            [filtrosPersonalizados]="getFiltrosPorCampo('ciudades_ruta')"
+            (seleccionarValor)="onValorSeleccionado('ciudades_ruta', $event)"></app-buscador-rutas>
+
+
+          <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('duracion_ruta')">
+            <mat-label>Duración (días)</mat-label>
+            <input matInput [value]="rutaForm.get('duracion_ruta')?.value" readonly />
+          </mat-form-field>
+          <app-buscador-rutas *ngIf="modalActivo === 'duracion_ruta'"
+            [filtrosPersonalizados]="getFiltrosPorCampo('duracion_ruta')"
+            (seleccionarValor)="onValorSeleccionado('duracion_ruta', $event)"></app-buscador-rutas>
+
+
+
+          <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('tematica_ruta')">
+            <mat-label>Temática</mat-label>
+            <input matInput [value]="rutaForm.get('tematica_ruta')?.value" readonly />
+          </mat-form-field>
+          <app-buscador-rutas *ngIf="modalActivo === 'tematica_ruta'"
+            [filtrosPersonalizados]="getFiltrosPorCampo('tematica_ruta')"
+            (seleccionarValor)="onValorSeleccionado('tematica_ruta', $event)"></app-buscador-rutas>
+
+
+
+          <!-- ITINERARIOS -->
+          <fieldset class="itinerario-section" formArrayName="itinerarios">
+            <legend class="legend">Itinerarios</legend>
+
+            <div class="itinerarios-container">
+              <div *ngFor="let it of itinerarios.controls; let i = index" [formGroupName]="i" class="itinerario-item">
+
+                <div class="descripcion-itinerario">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Descripción día {{ i + 1 }}</mat-label>
+                    <input matInput formControlName="descripcion" />
+                  </mat-form-field>
+                </div>
+
+                <!-- Selector visual de iconos -->
+                <div class="icono-selector">
+                  <div class="iconos-grid">
+                    <div *ngFor="let icon of iconsList" class="icono-opcion"
+                      [class.selected]="it.get('icono')?.value === icon" (click)="selectIcon(i, icon)">
+                      <img [src]="'assets/icons/' + icon" [alt]="icon" />
+                    </div>
+                  </div>
+                </div>
+
+                <button mat-raised-button (click)="removeItinerario(i)"
+                  class="itinerario-action-button">
+                  Eliminar
+                </button>
+
+              </div>
+            </div>
+
+            <button mat-raised-button  (click)="addItinerario()">
+              Añadir otro itinerario
+            </button>
+          </fieldset>
+
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Foto </mat-label>
+            <input matInput [value]="selectedFileName" readonly placeholder="Haz click o usa el icono"
+              (click)="openFileDialog()" style="pointer-events: auto;" />
+            <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto" (click)="openFileDialog()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Foto para el banner</mat-label>
+            <input matInput [value]="selectedBannerFileName" readonly placeholder="Selecciona una imagen"
+              (click)="openBannerFileDialog()" style="pointer-events: auto;" />
+            <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto"
+              (click)="openBannerFileDialog()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+
+          </mat-form-field>
+
+
+
+          <button mat-raised-button color="primary" [disabled]="rutaForm.invalid">
+            Añadir Ruta
+          </button>
+          <input type="hidden" formControlName="banner_foto" />
+        </form>
+      </div>
+
+
+      <!-- MODO EDITAR -->
+      <div *ngIf="mode==='edit'">
+        <h1>Listado de Rutas</h1>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let r">{{ r.id_ruta }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+            <mat-cell *matCellDef="let r">{{ r.titulo_ruta }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>Acción</mat-header-cell>
+            <mat-cell *matCellDef="let r">
+              <button mat-button (click)="selectRuta(r)">Editar</button>
+              <button mat-button (click)="onDelete(r.id_ruta)">Eliminar</button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
+
+        <!-- Formulario de edición -->
+        <div *ngIf="selectedRuta" class="edit-form">
+          <h1>Editar Ruta</h1>
+          <form [formGroup]="editForm" (ngSubmit)="onUpdate()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Título</mat-label>
+              <input matInput formControlName="titulo_ruta" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="description_ruta"></textarea>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('edit_presupuesto_ruta')">
+              <mat-label>Presupuesto</mat-label>
+              <input matInput [value]="editForm.get('edit_presupuesto_ruta')?.value" readonly />
+            </mat-form-field>
+            <app-buscador-rutas *ngIf="modalActivo === 'edit_presupuesto_ruta'"
+              [filtrosPersonalizados]="getFiltrosPorCampo('presupuesto_ruta')"
+              (seleccionarValor)="onValorSeleccionado('edit_presupuesto_ruta', $event)"></app-buscador-rutas>
+
+
+            <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('edit_ciudades_ruta')">
+              <mat-label>Ciudades</mat-label>
+              <input matInput [value]="editForm.get('edit_ciudades_ruta')?.value" readonly />
+            </mat-form-field>
+            <app-buscador-rutas *ngIf="modalActivo === 'edit_ciudades_ruta'"
+              [filtrosPersonalizados]="getFiltrosPorCampo('ciudades_ruta')"
+              (seleccionarValor)="onValorSeleccionado('edit_ciudades_ruta', $event)"></app-buscador-rutas>
+
+
+            <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('edit_duracion_ruta')">
+              <mat-label>Duración (días)</mat-label>
+              <input matInput [value]="editForm.get('edit_duracion_ruta')?.value" readonly />
+            </mat-form-field>
+            <app-buscador-rutas *ngIf="modalActivo === 'edit_duracion_ruta'"
+              [filtrosPersonalizados]="getFiltrosPorCampo('duracion_ruta')"
+              (seleccionarValor)="onValorSeleccionado('edit_duracion_ruta', $event)"></app-buscador-rutas>
+
+
+            <mat-form-field appearance="outline" class="full-width" (click)="abrirSelector('edit_tematica_ruta')">
+              <mat-label>Temática</mat-label>
+              <input matInput [value]="editForm.get('edit_tematica_ruta')?.value" readonly />
+            </mat-form-field>
+            <app-buscador-rutas *ngIf="modalActivo === 'edit_tematica_ruta'"
+              [filtrosPersonalizados]="getFiltrosPorCampo('tematica_ruta')"
+              (seleccionarValor)="onValorSeleccionado('edit_tematica_ruta', $event)"></app-buscador-rutas>
+
+
+            <!-- ITINERARIOS -->
+            <fieldset class="itinerario-section" formArrayName="itinerarios">
+              <legend class="legend">Itinerarios</legend>
+
+              <div class="itinerarios-container">
+                <div *ngFor="let it of editItinerarios.controls; let i = index" [formGroupName]="i"
+                  class="itinerario-item">
+
+                  <div class="descripcion-itinerario">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Descripción día {{ i + 1 }}</mat-label>
+                      <input matInput formControlName="descripcion" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="icono-selector">
+                    <div class="iconos-grid">
+                      <div *ngFor="let icon of iconsList" class="icono-opcion"
+                        [class.selected]="it.get('icono')?.value === icon" (click)="selectIconEdit(i, icon)">
+                        <img [src]="'assets/icons/' + icon" [alt]="icon" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button mat-raised-button  (click)="removeEditItinerario(i)">
+                    Eliminar
+                  </button>
+
+                </div>
+              </div>
+
+              <button mat-raised-buttonm (click)="addEditItinerario()">
+                Añadir otro itinerario
+              </button>
+            </fieldset>
+
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Foto </mat-label>
+              <input matInput [value]="selectedFileName" readonly placeholder="Haz click o usa el icono"
+                (click)="openFileDialog()" style="pointer-events: auto;" />
+              <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto" (click)="openFileDialog()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Foto para el banner</mat-label>
+              <input matInput [value]="selectedBannerFileName" readonly placeholder="Selecciona una imagen"
+                (click)="openBannerFileDialog()" style="pointer-events: auto;" />
+              <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto"
+                (click)="openBannerFileDialog()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+            </mat-form-field>
+
+
+            <button mat-raised-button color="accent" [disabled]="editForm.invalid">
+              Guardar Cambios
+            </button>
+            <input type="hidden" formControlName="url_foto" />
+          </form>
+        </div>
+      </div>
+    </ng-container>
+
+    <p *ngIf="error" class="error">Error: {{ error }}</p>
+  </section>
+
+  <input #fileInput type="file" accept="image/*" style="display: none;" (change)="onFileSelected($event)" />
+  <input #bannerFileInput type="file" accept="image/*" style="display: none;" (change)="onBannerFileSelected($event)" />
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,49 @@
+<section class="comments-section">
+    <!-- Comentarios Existentes-->
+    <h2>Opiniones</h2>
+    <div class="comment-item" *ngFor="let c of comentarios">
+        <i class="fa fa-user-circle avatar-icon"></i>
+      <div class="comment-body">
+        <div class="comment-header">
+          <span class="username">{{ c.usuario.name_user }}</span>
+          <div class="comment-stars">
+            <i
+              *ngFor="let s of getStarsForComentario(c)"
+              class="fa"
+              [ngClass]="s"
+            ></i>
+          </div>
+        </div>
+        <p class="comment-text">{{ c.comentario }}</p>
+      </div>
+    </div>
+
+    <!-- Comentarios Nuevos-->
+    <div class="leave-comment" *ngIf="isAuthenticated">
+      <h2>Deja tus comentarios</h2>
+      <div class="user-info">
+        <i class="fa fa-user-circle avatar-icon"></i>
+        <span class="username">{{ currentUser?.usuario?.name_user }}</span>
+      </div>
+
+      <div class="rating-input">
+        <label>Valoración</label>
+        <i
+          *ngFor="let n of [1,2,3,4,5]"
+          class="fa"
+          [ngClass]="n <= newRating ? 'fa-star' : 'fa-star-o'"
+          (click)="newRating = n"
+        ></i>
+      </div>
+
+      <div class="comment-input">
+        <label>Comentario</label>
+        <textarea
+          [(ngModel)]="newCommentText"
+          placeholder="Escribe tu opinión..."
+        ></textarea>
+      </div>
+
+      <button class="btn-submit" (click)="submitComment()">ENVIAR</button>
+    </div>
+  </section>

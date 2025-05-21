@@ -1,0 +1,23 @@
+
+.container {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: left;
+    color:var(--primary-color);
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+
+h1 {
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    text-align: center;
+}

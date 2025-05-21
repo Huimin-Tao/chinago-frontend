@@ -1,0 +1,162 @@
+<app-header></app-header>
+
+<!-- MODO - CREAR GUÍAS -->
+<div class="gestion-guias-container">
+  <aside class="sidebar">
+    <button mat-raised-button color="primary" (click)="switchMode('create')" [disabled]="mode==='create'">
+      CREAR GUÍAS
+    </button>
+    <button mat-raised-button color="accent" (click)="switchMode('edit')" [disabled]="mode==='edit'">
+      EDITAR O ELIMINAR GUÍAS
+    </button>
+  </aside>
+
+  <section class="content">
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate" class="spinner"></mat-progress-spinner>
+
+    <ng-container *ngIf="!loading">
+      <div *ngIf="mode==='create'">
+        <h1>Crear Guías</h1>
+        <form [formGroup]="guiaForm" (ngSubmit)="onCreate()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Título de la guía </mat-label>
+            <input matInput formControlName="titulo_guia" />
+            <mat-error *ngIf="guiaForm.get('titulo_guia')?.hasError('required')">
+              Requerido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción de la guía </mat-label>
+            <textarea matInput formControlName="description_guia"></textarea>
+            <mat-error *ngIf="guiaForm.get('description_guia')?.hasError('required')">
+              Requerido
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Foto </mat-label>
+            <input matInput [value]="selectedFileName" readonly placeholder="Haz click o usa el icono"
+              (click)="openFileDialog()" style="pointer-events: auto;" />
+            <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto" (click)="openFileDialog()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <mat-error *ngIf="guiaForm.get('url_foto')?.hasError('required')">
+              Requerido
+            </mat-error>
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Foto para el banner</mat-label>
+            <input matInput [value]="selectedBannerFileName" readonly placeholder="Selecciona una imagen"
+              (click)="openBannerFileDialog()" style="pointer-events: auto;" />
+            <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto"
+              (click)="openBannerFileDialog()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <mat-error *ngIf="guiaForm.get('banner_foto')?.hasError('required')">
+              Requerido
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" [disabled]="guiaForm.invalid">
+            Guardar Cambios
+          </button>
+        </form>
+      </div>
+
+
+
+<!-- MODO EDITAR / ELIMINAR GUÍAS-->
+      <div *ngIf="mode==='edit'">
+        <h1>Listado de Guías</h1>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let g">{{ g.id_guia }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+            <mat-cell *matCellDef="let g">{{ g.titulo_guia }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>Acción</mat-header-cell>
+            <mat-cell *matCellDef="let g">
+              <button mat-button (click)="selectGuia(g)">
+                Editar
+              </button>
+              <button mat-button (click)="onDelete(g.id_guia)">
+                Eliminar
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
+
+        <!-- FORMULARIO DE EDICIÓN -->
+        <div *ngIf="selectedGuia" class="edit-form">
+          <h1>Editar Guía</h1>
+          <form [formGroup]="editForm" (ngSubmit)="onUpdate()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Título de la guía *</mat-label>
+              <input matInput formControlName="titulo_guia" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Descripción de la guía *</mat-label>
+              <textarea matInput formControlName="description_guia"></textarea>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Foto *</mat-label>
+              <input matInput [value]="selectedFileName" readonly placeholder="Haz click o usa el icono"
+                (click)="openFileDialog()" style="pointer-events: auto;" />
+              <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto" (click)="openFileDialog()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+              <mat-error *ngIf="editForm.get('url_foto')?.hasError('required')">
+                Requerido
+              </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Foto para el banner</mat-label>
+              <input matInput [value]="selectedBannerFileName" readonly placeholder="Selecciona una imagen"
+                (click)="openBannerFileDialog()" style="pointer-events: auto;" />
+              <button mat-icon-button matSuffix type="button" aria-label="Seleccionar foto"
+                (click)="openBannerFileDialog()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+              <mat-error *ngIf="guiaForm.get('banner_foto')?.hasError('required')">
+                Requerido
+              </mat-error>
+            </mat-form-field>
+
+
+            <button mat-raised-button color="accent" [disabled]="editForm.invalid">
+              Guardar Cambios
+            </button>
+          </form>
+        </div>
+      </div>
+    </ng-container>
+
+    <p *ngIf="error" class="error">Error: {{ error }}</p>
+  </section>
+
+
+  <input #fileInput type="file" accept="image/*" style="display: none;" (change)="onFileSelected($event)" />
+  <input #bannerFileInput type="file" accept="image/*" style="display: none;" (change)="onBannerFileSelected($event)" />
+</div>
+
+<app-footer></app-footer>

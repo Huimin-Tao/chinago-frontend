@@ -1,0 +1,112 @@
+.explorar-container {
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+    color:var(--primary-color);
+  }
+
+  :host{
+    display: block;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+
+  .explorar-container h1 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+  }
+
+
+  /* Tarjeta  */
+  .grid-rutas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-bottom:2rem;
+  }
+
+
+
+  /* Paginación */
+  .paginacion-basica {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .paginacion-basica button {
+    padding: 0.8rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .paginacion-basica button:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+  }
+
+  .paginacion-basica button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .paginacion-numerica {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .paginacion-numerica li {
+    width: 1.5rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+  }
+
+  .paginacion-numerica li:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+  }
+
+  .paginacion-numerica li.activa {
+    background-color: var(--primary-color);
+    color: var(--text-color-dark-background);
+  }
+
+  /* Responsive: mostrar paginación numérica en desktop */
+  @media screen and (min-width: 1024px) {
+    .paginacion-basica {
+      display: none;
+    }
+    .paginacion-numerica {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .paginacion-basica {
+      display: flex;
+    }
+    .paginacion-numerica {
+      display: none;
+    }
+  }

@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<div class="explorar-container">
+  <h1>EXPLORA TUS RUTAS</h1>
+
+  <!-- Buscador de rutas -->
+  <app-buscador-rutas (search)="onSearch($event)"></app-buscador-rutas>
+
+
+  <!-- Grid de tarjetas de rutas  -->
+  <div class="grid-rutas">
+    <app-ruta-card *ngFor="let ruta of rutasPaginadas" [ruta]="ruta">
+    </app-ruta-card>
+  </div>
+
+  <!-- Paginación -->
+  <nav *ngIf="totalRutas > tamPagina" class="paginacion">
+    <!-- MÓVIL/TABLET: botones «Anterior» / «Siguiente» -->
+    <div class="paginacion-basica">
+      <button
+        (click)="onPageChange(paginaActual - 1)"
+        [disabled]="paginaActual === 1">
+        « Anterior
+      </button>
+
+      <button
+        (click)="onPageChange(paginaActual + 1)"
+        [disabled]="paginaActual === totalPaginas">
+        Siguiente »
+      </button>
+    </div>
+
+    <!-- DESKTOP: lista numerada -->
+    <ul class="paginacion-numerica">
+      <li
+        *ngFor="let p of paginas"
+        (click)="onPageChange(p)"
+        [class.activa]="paginaActual === p">
+        {{ p }}
+      </li>
+    </ul>
+  </nav>
+
+
+</div>
+
+<app-footer></app-footer>

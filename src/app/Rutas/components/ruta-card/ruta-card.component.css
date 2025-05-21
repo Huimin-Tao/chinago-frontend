@@ -1,0 +1,62 @@
+.ruta-card {
+  display: block;
+  background-color: var(--text-color-dark-background);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ruta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.imagen-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ruta-imagen {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.ruta-tematica {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10;
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--text-color-dark-background);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+
+.ruta-info {
+  padding-top: 0.75rem;
+  padding-bottom:0.75rem;
+  padding-left:0.75rem;
+  text-align:left;
+}
+
+.ruta-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom:0.25rem;
+}
+
+.ruta-duracion,
+.ruta-ciudad {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,125 @@
+<app-header></app-header>
+
+<main class="ruta-page" *ngIf="ruta; else loading">
+
+  <!-- MIGA DE PAN -->
+  <nav class="breadcrumb">
+    <a routerLink="/">Home</a> ›
+    <a routerLink="/rutas">Rutas</a> ›
+    <span>{{ ruta.titulo_ruta }}</span>
+  </nav>
+
+
+  <!-- BANNER -->
+  <section class="banner">
+    <img [src]=" apiurl  + ruta.fotos[1]!.url_foto" alt="{{ ruta.titulo_ruta }}" class="banner-img" />
+    <div class="banner-overlay">
+      <h1 class="banner-title">{{ ruta.titulo_ruta}}</h1>
+      <button class="cta-button"><a routerLink="/formulario">CREA TU VIAJE</a></button>
+    </div>
+  </section>
+
+
+  <div class="ruta-content">
+    <!-- Mapa Interactivo -->
+    <section class="map-section">
+
+      <div class="map-search">
+        <input type="text" placeholder="Buscar la ciudad" [(ngModel)]="searchQuery" (keyup.enter)="buscarCiudad()" />
+        <button (click)="buscarCiudad()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+      <div #mapContainer class="map-container"></div>
+    </section>
+
+    <!-- Datos de la ruta -->
+    <section class="details-section">
+      <h2>{{ruta.titulo_ruta}}</h2>
+      <p>{{ ruta.description_ruta }}</p>
+
+      <div class="detail-item detail-first">
+        <span class="detail-label">Presupuesto:</span>
+        {{ ruta.filtros[3].contenido_filtro }}
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Ciudades:</span>
+        {{ ruta.filtros[2].contenido_filtro }}
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Temática:</span>
+        {{ ruta.filtros[0].contenido_filtro }}
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Duración:</span>
+        {{ ruta.filtros[1].contenido_filtro }}
+      </div>
+
+      <div class="detail-item rating">
+        <span class="detail-label">Valoración:</span>
+        <ng-container *ngFor="let star of stars">
+          <i class="fa" [ngClass]="star"></i>
+        </ng-container>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- Itinerario -->
+  <section class="itinerary-section">
+    <h2>Itinerario</h2>
+    <div class="itinerary-grid">
+      <!-- Columna izquierda -->
+      <div class="itinerary-column">
+        <div class="itinerary-item" *ngFor="let item of leftItinerarios">
+          <div class="itinerary-icon">
+            <img [src]="'assets/icons/' + item.url_icono" alt="Icono Día {{ item.num_dia }}" />
+          </div>
+          <div class="itinerary-content">
+            <span class="day">Día {{ item.num_dia }}</span>
+            <p class="summary">{{ item.resumen_itinerario }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="itinerary-column">
+        <div class="itinerary-item" *ngFor="let item of rightItinerarios">
+          <div class="itinerary-icon">
+            <img [src]="'assets/icons/' + item.url_icono" alt="Icono Día {{ item.num_dia }}" />
+          </div>
+          <div class="itinerary-content">
+            <span class="day">Día {{ item.num_dia }}</span>
+            <p class="summary">{{ item.resumen_itinerario }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Rutas Similares -->
+  <section class="similar-section" *ngIf="similarRutas.length">
+    <h2>Rutas Similares</h2>
+    <div class="similar-grid">
+      <app-ruta-card *ngFor="let rutaSim of similarRutas" [ruta]="rutaSim"></app-ruta-card>
+    </div>
+  </section>
+
+
+  <!-- Comentarios -->
+  <app-comentarios [rutaId]="ruta.id_ruta"></app-comentarios>
+
+</main>
+
+
+<ng-template #loading>
+  <p>Cargando ruta...</p>
+</ng-template>
+
+
+<app-footer></app-footer>

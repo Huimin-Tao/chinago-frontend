@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<div class="leads-container">
+    <h1>Listado de Clientes Potenciales</h1>
+
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!loading">
+
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.nombre_cliente }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.apellido_cliente }}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.email_cliente }}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="telefono">
+        <mat-header-cell *matHeaderCellDef>Teléfono</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.telefono_cliente }}</mat-cell>
+      </ng-container>
+
+      <!-- Presupuesto Column -->
+      <ng-container matColumnDef="presupuesto">
+        <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.presupuesto }}€</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="ciudad">
+        <mat-header-cell *matHeaderCellDef>Ciudad</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.ciudad }}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="naturaleza">
+        <mat-header-cell *matHeaderCellDef>Viajeros</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.num_grupo }}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="plan">
+        <mat-header-cell *matHeaderCellDef>Hotel</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.hotel }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.estado_peticion }}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Acción</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button
+                  aria-label="Toggle estado"
+                  (click)="onToggleStatus(element)">
+            <mat-icon>
+              {{ element.estado === 'en proceso' ? 'check_circle_outline' : 'schedule' }}
+            </mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <p *ngIf="error" class="error">Error: {{ error }}</p>
+  </div>
+
+  <app-footer></app-footer>

@@ -1,0 +1,326 @@
+.ruta-page {
+  position: relative;
+  width: 96%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 2rem 1rem;
+  color: var(--primary-color);
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+h1 {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  text-transform: none;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+.breadcrumb span {
+  font-weight: 600;
+}
+
+.breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.banner-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.cta-button {
+  background-color: var(--secondary-color);
+  color: var(--text-color-dark-background);
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.75rem 2rem;
+  margin-top: 3rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--contrast-color-light);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 200px;
+  }
+
+  .banner-title {
+    font-size: 1.8rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+
+.ruta-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 3em;
+  margin-bottom: 2rem;
+}
+
+.map-container {
+  width:100%;
+  grid-column: 1 / -1;
+  height: 380px;
+  border: none;
+}
+
+.details-section {
+  grid-column: 1 / -1;
+}
+
+.details-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.detail-item {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.detail-first{
+  margin-top:1rem;
+}
+.detail-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.rating i {
+  margin-right: 4px;
+}
+
+
+@media (min-width: 769px) {
+  .map-container {
+    grid-column: 1 / 2;
+  }
+  .details-section {
+    grid-column: 2 / 3;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .ruta-content {
+    grid-template-columns: 1fr;
+  }
+  .map-container {
+    height: 300px;
+  }
+}
+
+
+.map-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px
+}
+
+.map-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+}
+
+.map-search input::placeholder {
+  color: var(--text-color-grey);
+}
+
+.map-search button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.map-search button .fa-search {
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+
+/* Itinerario */
+.itinerary-section {
+  margin-bottom: 3rem;
+}
+
+.itinerary-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.itinerary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.itinerary-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.itinerary-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.itinerary-item:first-child {
+  border-top: none;
+}
+
+.itinerary-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.itinerary-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.itinerary-content .day {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.itinerary-content .summary {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .itinerary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .itinerary-grid{
+    gap:0;
+  }
+}
+
+
+/* — Rutas Similares — */
+.similar-section {
+  margin-bottom: 3rem;
+}
+
+.similar-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.similar-grid {
+  display: grid;
+  width: 100%;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .similar-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .similar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

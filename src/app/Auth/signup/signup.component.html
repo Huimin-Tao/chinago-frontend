@@ -1,0 +1,70 @@
+<app-header></app-header>
+
+<div class="auth-container">
+    <h1>SIGNUP</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="input-group">
+        <label>Nombre *</label>
+        <input type="text" formControlName="nombre" />
+
+        <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="error-message">
+          <mat-icon class="error-icon">error</mat-icon>
+          <span class="error-text">
+            <ng-container *ngIf="form.get('nombre')?.hasError('required')">El nombre es obligatorio.</ng-container>
+          </span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Apellidos *</label>
+        <input type="text" formControlName="apellidos" />
+
+        <div *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched" class="error-message">
+          <mat-icon class="error-icon">error</mat-icon>
+          <span class="error-text">
+            <ng-container *ngIf="form.get('apellidos')?.hasError('required')">Los apellidos son obligatorios.</ng-container>
+          </span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Email *</label>
+        <input type="email" formControlName="email" />
+
+        <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+          <mat-icon class="error-icon">error</mat-icon>
+          <span class="error-text">
+            <ng-container *ngIf="form.get('email')?.hasError('required')">El email es obligatorio.</ng-container>
+            <ng-container *ngIf="form.get('email')?.hasError('email')">Introduce un correo electrónico válido.</ng-container>
+          </span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña *</label>
+        <input type="password" formControlName="password" />
+
+        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">
+          <mat-icon class="error-icon">error</mat-icon>
+          <span class="error-text">
+            <ng-container *ngIf="form.get('password')?.hasError('required')">La contraseña es obligatoria.</ng-container>
+          </span>
+        </div>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="aceptar" />
+          Acepto los términos y condiciones.
+        </label>
+        <div *ngIf="form.get('aceptar')?.invalid && form.get('aceptar')?.touched" class="error-message">
+          <mat-icon class="error-icon">error</mat-icon>
+          <span class="error-text">Debe aceptar los términos y condiciones.</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="form.invalid || isSubmitting" [class.pulsado]="isSubmitting">SIGNUP</button>
+    </form>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,54 @@
+.leads-container {
+  position:relative;
+  width:80%;
+  max-width:1200px;
+  margin:auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--primary-color);
+  }
+
+  :host{
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+
+  h1 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+  }
+
+
+  .mat-header-cell,
+  .mat-mdc-header-cell,
+  .mat-mdc-table-header-cell {
+    font-weight: 600 !important;
+  }
+
+
+  mat-table {
+    width: 100%;
+    overflow: auto;
+  }
+
+
+  .error {
+    color: #f44336;
+    margin-top: 16px;
+  }
+
+  mat-progress-spinner {
+    display: block;
+    margin: 40px auto;
+  }
+
+  button{
+    color:var(--secondary-color);
+  }
+
+  button:hover{
+    background-color: var(--contrast-color-light);
+  }

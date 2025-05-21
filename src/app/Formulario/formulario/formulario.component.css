@@ -1,0 +1,149 @@
+
+.auth-container {
+    position:relative;
+    width: 80%;
+    max-width:600px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .auth-container h1 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+  }
+
+  .auth-container label {
+    display: block;
+    margin: 1rem 0 0.3rem;
+    text-align: left;
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+
+  .auth-container input[type="text"],
+  .auth-container input[type="email"],
+  .auth-container input[type="tel"],
+  .auth-container select,
+  .auth-container textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    transition: border-color 0.3s ease;
+  }
+
+  .auth-container input:focus,
+  .auth-container select:focus,
+  .auth-container textarea:focus {
+    border: 2px solid var(--secondary-color);
+  }
+
+  .auth-container input::placeholder,
+  .auth-container textarea::placeholder {
+    font-family: var(--roboto);
+  }
+
+  /* Grupos de botones estilo toggle */
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .button-group button {
+    flex: 1 1 calc(50% - 0.5rem);
+    padding: 0.6rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color:var(--primary-color);
+    color:var(--text-color-dark-background);
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .button-group button.selected {
+    background: var(--secondary-color);
+    color: var(--text-color-dark-background);
+    border-color: var(--secondary-color);
+  }
+
+  /* Checkbox */
+  .checkbox {
+    text-align: left;
+    margin-top: 1rem;
+  }
+  .auth-container input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--text-color-dark-background);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .auth-container input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  .auth-container input[type="checkbox"]:checked::before {
+    content: '\2713';
+    color: var(--text-color-dark-background);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+  }
+
+  /* Botón submit */
+  .auth-container button[type="submit"] {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: var(--secondary-color);
+    color: var(--text-color-dark-background);
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  .auth-container button:disabled {
+    background-color: var(--contrast-color-light);
+    color: var(--text-color-dark-background);
+    cursor: not-allowed;
+  }
+  .auth-container button.pulsado {
+    opacity: 0.8;
+  }
+
+  /* Mensaje de error */
+  .error-message {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .error-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  .error-text {
+    color: var(--secondary-color);
+  }
+
+  /* Bordes rojos en inputs con error */
+  .auth-container input.ng-invalid.ng-touched,
+  .auth-container select.ng-invalid.ng-touched,
+  .auth-container textarea.ng-invalid.ng-touched {
+    border-color: var(--secondary-color);
+  }
+
+  .auth-container textarea {
+    font-family: var(--roboto);
+}

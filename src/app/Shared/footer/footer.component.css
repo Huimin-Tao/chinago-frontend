@@ -1,0 +1,53 @@
+.footer {
+    background-color: #313866;
+    color: var(--text-color-dark-background);
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding:25px 50px;
+    text-align:center;
+    margin-top:auto;
+}
+
+
+@media (max-width:480px){
+    .footer{
+        padding-right:2em;
+        padding-left:2em;
+    }
+}
+
+.footer a {
+    color: var(--text-color-dark-background);
+    font-size:0.9rem;
+}
+
+.footer a:hover {
+    color: var(--contrast-color-light);
+}
+
+.footer .legal {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    gap: 5px;
+}
+
+.info-footer{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:flex-end;
+    align-self:stretch;
+}
+
+.redes-sociales{
+    display:flex;
+    gap: 15px;
+}
+
+.copyright{
+    font-size:0.9rem;
+}
